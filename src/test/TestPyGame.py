@@ -1,31 +1,30 @@
 import pygame;
 import os;
-import string
 
 
 class TestPyGame(object):
-    
-    LABYRINTH_HEIGHT = 20;
-    LABYRINTH_WIDTH = 20;
-    LABYRINTH_WALL = 0;
+    LABYRINTH_ENTRANCE_IMAGE = "entrance.png";
+    LABYRINTH_EXIT_IMAGE = "exit.png";
+    LABYRINTH_ROAD_IMAGE = "road.png";
+    LABYRINTH_WALL_IMAGE = "wall.png";
+    IMAGES_FOLDER_NAME = "images";
     IMAGE_HEIGHT = 20;
     IMAGE_WIDTH = 20;
-    IMAGES_FOLDER_NAME = "images";
-    IMAGES_EXTENSION = ".png";
+    entranceImage = None;
+    exitImage = None;
+    roadImage = None;
+    wallImage = None;
     screenSize = None;
     done = False;
-    labyrinthArray = None;
-    
-    def __init__(self):
-        self.labyrinthArray = [[0 for j in range (self.LABYRINTH_WIDTH)] 
-                          for i in range (self.LABYRINTH_HEIGHT)];
-        self.screenSize = (self.LABYRINTH_HEIGHT * self.IMAGE_HEIGHT, 
-                           self.LABYRINTH_WIDTH * self.IMAGE_WIDTH);
+
+    def __init__(self, labyrinthHeight, labyrinthWidth):
+        self.screenSize = (labyrinthHeight * self.IMAGE_HEIGHT, 
+                           labyrinthWidth * self.IMAGE_WIDTH);
         pygame.init();
-        self.imagePath = os.getcwd();
-        r = self.imagePath.rfind("\\");
-        self.imagePath = self.imagePath[0 : r + 1] + self.IMAGES_FOLDER_NAME; '''wycinamy stringa od poczatku do ostatniego \\'''
-        self.wallImage = pygame.image.load(self.imagePath + "\\wall.png");
+        self.entranceImage = self.loadImage(self.prepareImagePath(self.LABYRINTH_ENTRANCE_IMAGE));
+        self.exitImage = self.loadImage(self.prepareImagePath(self.LABYRINTH_EXIT_IMAGE));
+        self.roadImage = self.loadImage(self.prepareImagePath(self.LABYRINTH_ROAD_IMAGE));
+        self.wallImage = self.loadImage(self.prepareImagePath(self.LABYRINTH_WALL_IMAGE));
         
     def loop(self):
         while not self.done:
@@ -33,17 +32,38 @@ class TestPyGame(object):
                 if event.type == pygame.QUIT:
                     self.done = True
         pygame.quit();
+        
+    def prepareImagePath(self, imageName):
+        path = os.getcwd();
+        maxIndexOfBackslashInPath = path.rfind("\\");
+        '''wycinamy stringa od poczatku do ostatniego \\'''
+        path = path[0 : maxIndexOfBackslashInPath + 1] + self.IMAGES_FOLDER_NAME + "\\" + imageName;
+        return path; 
     
-    def showSomething(self):
+    def loadImage(self, path):
+        image = pygame.image.load(path);
+        return image;
+    
+    def showLabyrinth(self, labyrinthArray, labyrinthHeight, labyrinthWidth,
+                      labyrinthEntranceFlag, labyrinthExitFlag, labyrinthRoadFlag,
+                      labyrinthWallFlag, xEntrancePosition, yEntrancePosition, 
+                      xExitPosition, yExitPosition):
+        
         self.surface = pygame.display.set_mode(self.screenSize, pygame.DOUBLEBUF);
-        for i in range(self.LABYRINTH_HEIGHT):
-            for j in range(self.LABYRINTH_WIDTH):
-                self.surface.blit(self.wallImage, (i * self.IMAGE_WIDTH, j * self.IMAGE_HEIGHT));
+        for i in range(labyrinthHeight):
+            for j in range(labyrinthWidth):
+                if (labyrinthArray[i][j] == labyrinthWallFlag):
+                    self.surface.blit(self.wallImage, (i * self.IMAGE_WIDTH, 
+                                                   j * self.IMAGE_HEIGHT));
+                    
+                elif (labyrinthArray[i][j] == labyrinthRoadFlag):
+                    self.surface.blit(self.roadImage, (i * self.IMAGE_WIDTH, 
+                                                   j * self.IMAGE_HEIGHT));
+                    
+        self.surface.blit(self.entranceImage, (xEntrancePosition * self.IMAGE_WIDTH, 
+        yEntrancePosition * self.IMAGE_HEIGHT));
+        self.surface.blit(self.exitImage, (xExitPosition * self.IMAGE_WIDTH, 
+        yExitPosition * self.IMAGE_HEIGHT));
         pygame.display.flip();
         self.loop();
-        
-    def getImagesNamesFromDirectory(self):
-        files = os.listdir(self.imagePath);
-        index = files.index("wall.PNG");
-        print(index);
         
