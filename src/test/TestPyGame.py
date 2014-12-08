@@ -1,5 +1,7 @@
 import pygame;
 import os;
+import string
+
 
 class TestPyGame(object):
     
@@ -21,7 +23,8 @@ class TestPyGame(object):
                            self.LABYRINTH_WIDTH * self.IMAGE_WIDTH);
         pygame.init();
         self.imagePath = os.getcwd();
-        self.imagePath = self.imagePath.replace("src", self.IMAGES_FOLDER_NAME);
+        r = self.imagePath.rfind("\\");
+        self.imagePath = self.imagePath[0 : r + 1] + self.IMAGES_FOLDER_NAME; '''wycinamy stringa od poczatku do ostatniego \\'''
         self.wallImage = pygame.image.load(self.imagePath + "\\wall.png");
         
     def loop(self):
@@ -36,11 +39,11 @@ class TestPyGame(object):
         for i in range(self.LABYRINTH_HEIGHT):
             for j in range(self.LABYRINTH_WIDTH):
                 self.surface.blit(self.wallImage, (i * self.IMAGE_WIDTH, j * self.IMAGE_HEIGHT));
-                pygame.display.flip();
+        pygame.display.flip();
         self.loop();
         
     def getImagesNamesFromDirectory(self):
         files = os.listdir(self.imagePath);
-        for image in files:
-            if ((image.lower()).endswith(self.IMAGES_EXTENSION)):
-                print(image);
+        index = files.index("wall.PNG");
+        print(index);
+        
