@@ -17,7 +17,7 @@ class TestPyGame(object):
     wallImage = None;
     screenSize = None;
     screenBackgroundColour = (255,255,255);
-    done = False;
+    running = False;
     
 
     def __init__(self, labyrinthHeight, labyrinthWidth):
@@ -33,11 +33,11 @@ class TestPyGame(object):
         self.roadImage = self.loadImage(self.prepareImagePath(self.LABYRINTH_ROAD_IMAGE));
         self.wallImage = self.loadImage(self.prepareImagePath(self.LABYRINTH_WALL_IMAGE));
         
-    def loop(self):
-        while not self.done:
+    def displayLoop(self):
+        while not self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.done = True
+                    self.running = True
         pygame.quit();
         
     def prepareImagePath(self, imageName):
@@ -73,4 +73,4 @@ class TestPyGame(object):
         self.surface.blit(self.exitImage, (xExitPosition * self.IMAGE_WIDTH, 
         yExitPosition * self.IMAGE_HEIGHT));
         pygame.display.flip();
-        self.loop();
+        self.displayLoop();
