@@ -15,10 +15,10 @@ LABYRINTH_ROAD_DOWN = 8;      'komora z nitka w dol'
 
 PROBABILITY = 0.5;
 
-xEntrancePosition = 1;
-yEntrancePosition = 0;
-xExitPosition = 3;
-yExitPosition = 4;
+xEntrancePosition = 4;
+yEntrancePosition = 3;
+xExitPosition = 0;
+yExitPosition = 2;
 
 labyrinthArray = [[LabyrinthPoint() for j in range (LABYRINTH_HEIGHT)] 
                           for i in range (LABYRINTH_WIDTH)];
@@ -33,12 +33,10 @@ def initializeLabyrinth():
     labyrinthArray[xEntrancePosition][yEntrancePosition].labyrinthPointType = LABYRINTH_ENTRANCE;
     labyrinthArray[xExitPosition][yExitPosition].labyrinthPointType = LABYRINTH_ROAD;
     
-    labyrinthArray[1][1].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[1][2].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[1][3].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[2][1].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[2][2].labyrinthPointType = LABYRINTH_ROAD;
-    labyrinthArray[3][1].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[3][2].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[3][3].labyrinthPointType = LABYRINTH_ROAD;
     
@@ -120,3 +118,10 @@ def showLabirynthWithRoad():
     for i in range(LABYRINTH_HEIGHT):
         for j in range(LABYRINTH_WIDTH):
             print("i = ", i, " j = ", j, " typ pola = ", labyrinthArray[i][j].labyrinthPointType);
+
+def clearFlagsAfterRoadSearch():
+    for i in range(LABYRINTH_HEIGHT):
+        for j in range(LABYRINTH_WIDTH):
+            if (labyrinthArray[i][j].labyrinthPointType in range (LABYRINTH_ROAD_LEFT, LABYRINTH_ROAD_DOWN + 1)):
+                labyrinthArray[i][j].labyrinthPointType = LABYRINTH_ROAD;
+    labyrinthArray[xExitPosition][yExitPosition].labyrinthPointType = LABYRINTH_EXIT;
