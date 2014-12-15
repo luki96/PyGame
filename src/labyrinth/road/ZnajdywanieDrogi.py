@@ -1,8 +1,8 @@
-from labirynth.base import LabyrinthPoint;
+from labyrinth.base.LabyrinthPoint import LabyrinthPoint;
 from collections import deque;
 
-LABYRINTH_HEIGHT = 5;
-LABYRINTH_WIDTH = 5;
+LABYRINTH_HEIGHT = 20;
+LABYRINTH_WIDTH = 20;
 LABYRINTH_WALL = 0;
 LABYRINTH_ROAD = 1;
 LABYRINTH_BEST_ROAD = 2

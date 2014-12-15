@@ -60,14 +60,17 @@ class TestPyGame(object):
         
         for i in range(labyrinthHeight):
             for j in range(labyrinthWidth):
-                if (labyrinthArray[i][j] == labyrinthWallFlag):
+                if (labyrinthArray[i][j].labyrinthPointType == labyrinthWallFlag):
                     self.surface.blit(self.wallImage, (i * self.IMAGE_WIDTH, 
                                                    j * self.IMAGE_HEIGHT));
                     
-                elif (labyrinthArray[i][j] == labyrinthRoadFlag):
+                elif (labyrinthArray[i][j].labyrinthPointType == labyrinthRoadFlag):
                     self.surface.blit(self.roadImage, (i * self.IMAGE_WIDTH, 
                                                    j * self.IMAGE_HEIGHT));
-                    
+                else:
+                    self.surface.blit(self.bestRoadImage, (i * self.IMAGE_WIDTH,
+                                                           j * self.IMAGE_HEIGHT));
+                
         self.surface.blit(self.entranceImage, (xEntrancePosition * self.IMAGE_WIDTH, 
         yEntrancePosition * self.IMAGE_HEIGHT));
         self.surface.blit(self.exitImage, (xExitPosition * self.IMAGE_WIDTH, 

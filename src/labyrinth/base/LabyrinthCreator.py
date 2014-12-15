@@ -1,5 +1,5 @@
 import random;
-from test.LabyrinthPoint import LabyrinthPoint
+from labyrinth.base import LabyrinthPoint;
 
 class LabyrinthCreator():
 
