@@ -1,4 +1,4 @@
-from test.LabyrinthPoint import LabyrinthPoint;
+from labirynth.base import LabyrinthPoint;
 from collections import deque;
 
 LABYRINTH_HEIGHT = 5;
