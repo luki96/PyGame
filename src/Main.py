@@ -1,4 +1,5 @@
 
+from labyrinth.constants.Consts import Consts;
 from labyrinth.base.LabyrinthCreator import LabyrinthCreator;
 from labyrinth.road import ZnajdywanieDrogi;
 from labyrinth.display.TestPyGame import TestPyGame;
@@ -30,10 +31,10 @@ if __name__ == '__main__':
     print("***************************************************************");
     creator.showLab();
     
-    testPyGame = TestPyGame(creator.LABYRINTH_HEIGHT, creator.LABYRINTH_WIDTH);
-    testPyGame.showLabyrinth(creator.labyrinthArray, creator.LABYRINTH_HEIGHT, 
-                             creator.LABYRINTH_WIDTH, creator.LABYRINTH_ENTRANCE,
-                             creator.LABYRINTH_EXIT, creator.LABYRINTH_ROAD,
-                             creator.LABYRINTH_WALL, creator.xEntrancePosition, 
+    testPyGame = TestPyGame(Consts.LABYRINTH_HEIGHT, Consts.LABYRINTH_WIDTH);
+    testPyGame.showLabyrinth(Consts.LABYRINTH_HEIGHT, Consts.LABYRINTH_WIDTH, 
+                             Consts.LABYRINTH_ENTRANCE, Consts.LABYRINTH_EXIT,
+                             Consts.LABYRINTH_ROAD, Consts.LABYRINTH_WALL,
+                             creator.labyrinthArray, creator.xEntrancePosition, 
                              creator.yEntrancePosition, creator.xExitPosition, 
                              creator.yExitPosition);

@@ -1,17 +1,10 @@
 import random;
 from labyrinth.base.LabyrinthPoint import LabyrinthPoint;
+from labyrinth.constants.Consts import Consts;
 from collections import deque;
 
 class LabyrinthCreator():
 
-    LABYRINTH_HEIGHT = 5;
-    LABYRINTH_WIDTH = 5;
-    LABYRINTH_WALL = 0;
-    LABYRINTH_ROAD = 1;
-    LABYRINTH_BEST_ROAD = 2
-    LABYRINTH_ENTRANCE = 3;
-    LABYRINTH_EXIT = 4;
-    PROBABILITY = 0.5;
     xEntrancePosition = 0;
     yEntrancePosition = 0;
     xExitPosition = 0;
@@ -19,64 +12,64 @@ class LabyrinthCreator():
     labyrinthArray = None;
 
     def __init__(self):
-        self.labyrinthArray = [[LabyrinthPoint() for j in range (self.LABYRINTH_WIDTH)] 
-                          for i in range (self.LABYRINTH_HEIGHT)];
+        self.labyrinthArray = [[LabyrinthPoint() for j in range (Consts.LABYRINTH_WIDTH)] 
+                          for i in range (Consts.LABYRINTH_HEIGHT)];
     
     def initializeLabyrinth(self):
-        for i in range(self.LABYRINTH_HEIGHT):
-            for j in range(self.LABYRINTH_WIDTH):
+        for i in range(Consts.LABYRINTH_HEIGHT):
+            for j in range(Consts.LABYRINTH_WIDTH):
                 self.labyrinthArray[i][j].xPointPosition = i;
                 self.labyrinthArray[i][j].yPointPosition = j;
-                self.labyrinthArray[i][j].labyrinthPointType = self.LABYRINTH_WALL;
+                self.labyrinthArray[i][j].labyrinthPointType = Consts.LABYRINTH_WALL;
                 
     def createLabyrinthEntrance(self):
         self.xEntrancePosition = 0;
         self.yEntrancePosition = 0;       
-        self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = self.LABYRINTH_ENTRANCE;
+        self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = Consts.LABYRINTH_ENTRANCE;
         
-        self.xExitPosition = 3;
+        self.xExitPosition = 4;
         self.yExitPosition = 4;
-        self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = self.LABYRINTH_EXIT;
+        self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = Consts.LABYRINTH_EXIT;
 
-        '''self.labyrinthArray[2][2].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[2][3].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[3][0].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[3][1].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[3][2].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[3][3].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[4][1].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[4][2].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[4][3].labyrinthPointType = self.LABYRINTH_ROAD;
+        '''self.labyrinthArray[2][2].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[2][3].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[3][0].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[3][1].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[3][2].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[3][3].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[4][1].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[4][2].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[4][3].labyrinthPointType = Consts.LABYRINTH_ROAD;
         '''
-        '''self.xEntrancePosition = random.randrange(self.LABYRINTH_HEIGHT);
-        if ((self.xEntrancePosition == 0) or (self.xEntrancePosition == self.LABYRINTH_HEIGHT - 1)):
-            self.yEntrancePosition = random.randrange(self.LABYRINTH_WIDTH);
-            self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = self.LABYRINTH_ENTRANCE;
-        elif (self.xEntrancePosition in range(1, self.LABYRINTH_HEIGHT - 1)):
-            if (random.random() < self.PROBABILITY):
+        '''self.xEntrancePosition = random.randrange(Consts.LABYRINTH_HEIGHT);
+        if ((self.xEntrancePosition == 0) or (self.xEntrancePosition == Consts.LABYRINTH_HEIGHT - 1)):
+            self.yEntrancePosition = random.randrange(Consts.LABYRINTH_WIDTH);
+            self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = Consts.LABYRINTH_ENTRANCE;
+        elif (self.xEntrancePosition in range(1, Consts.LABYRINTH_HEIGHT - 1)):
+            if (random.random() < Consts.PROBABILITY):
                 self.yEntrancePosition = 0;        
-                self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = self.LABYRINTH_ENTRANCE;
+                self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = Consts.LABYRINTH_ENTRANCE;
             else:
-                self.yEntrancePosition = self.LABYRINTH_WIDTH - 1;
-                self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = self.LABYRINTH_ENTRANCE;
+                self.yEntrancePosition = Consts.LABYRINTH_WIDTH - 1;
+                self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = Consts.LABYRINTH_ENTRANCE;
            '''     
     def createLabyrinthExit(self):
         if (self.yEntrancePosition == 0):
-            self.xExitPosition = random.randrange(self.LABYRINTH_HEIGHT);
-            self.yExitPosition = self.LABYRINTH_WIDTH - 1;
-            self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = self.LABYRINTH_EXIT;
-        elif (self.yEntrancePosition == self.LABYRINTH_WIDTH - 1):
-            self.xExitPosition = random.randrange(self.LABYRINTH_HEIGHT);
+            self.xExitPosition = random.randrange(Consts.LABYRINTH_HEIGHT);
+            self.yExitPosition = Consts.LABYRINTH_WIDTH - 1;
+            self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = Consts.LABYRINTH_EXIT;
+        elif (self.yEntrancePosition == Consts.LABYRINTH_WIDTH - 1):
+            self.xExitPosition = random.randrange(Consts.LABYRINTH_HEIGHT);
             self.yExitPosition = 0;
-            self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = self.LABYRINTH_EXIT;
-        elif (self.yEntrancePosition in range(1, self.LABYRINTH_WIDTH - 1)):
-            self.xExitPosition = self.LABYRINTH_HEIGHT - 1;
-            self.yExitPosition = random.randrange(self.LABYRINTH_WIDTH - 1);
-            self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = self.LABYRINTH_EXIT;
+            self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = Consts.LABYRINTH_EXIT;
+        elif (self.yEntrancePosition in range(1, Consts.LABYRINTH_WIDTH - 1)):
+            self.xExitPosition = Consts.LABYRINTH_HEIGHT - 1;
+            self.yExitPosition = random.randrange(Consts.LABYRINTH_WIDTH - 1);
+            self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = Consts.LABYRINTH_EXIT;
                     
     def showLab(self):
-        for i in range(self.LABYRINTH_HEIGHT):
-            for j in range(self.LABYRINTH_WIDTH):
+        for i in range(Consts.LABYRINTH_HEIGHT):
+            for j in range(Consts.LABYRINTH_WIDTH):
                 print("i = ", i, " j = ", j,
                  "typ pola = ", self.labyrinthArray[i][j].labyrinthPointType);
     
@@ -100,21 +93,21 @@ class LabyrinthCreator():
         self.connectPoints(newX, newY, self.xExitPosition, self.yExitPosition);
         
     def generateRandomValue(self, currentValue):
-        newValue = random.randrange(0, self.LABYRINTH_WIDTH);
+        newValue = random.randrange(0, Consts.LABYRINTH_WIDTH);
         while (newValue == currentValue):
-            newValue = random.randrange(0, self.LABYRINTH_WIDTH);
+            newValue = random.randrange(0, Consts.LABYRINTH_WIDTH);
         return newValue;
     
     def connectPoints(self, startX, startY, stopX, stopY):
-        self.labyrinthArray[stopX][stopY].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[stopX][stopY].labyrinthPointType = Consts.LABYRINTH_ROAD;
         
         while (startX != stopX):
             if (stopX > startX):        #Idziemy w prawa strone
                 startX += 1;
-                self.labyrinthArray[startX][stopY].labyrinthPointType = self.LABYRINTH_ROAD;
+                self.labyrinthArray[startX][stopY].labyrinthPointType = Consts.LABYRINTH_ROAD;
             elif (stopX < startX):        #Idziemy w lewa strone
                 startX -= 1;
-                self.labyrinthArray[startX][stopY].labyrinthPointType = self.LABYRINTH_ROAD;
+                self.labyrinthArray[startX][stopY].labyrinthPointType = Consts.LABYRINTH_ROAD;
 
 '''def createLabyrinthRoads(self):
         visitedLabyrinthPoints = 0;

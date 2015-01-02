@@ -51,9 +51,9 @@ class TestPyGame(object):
         image = pygame.image.load(path).convert_alpha();
         return image;
     
-    def showLabyrinth(self, labyrinthArray, LABYRINTH_HEIGHT , LABYRINTH_WIDTH,
-                      LABYRINTH_ENTRANCE, LABYRINTH_EXIT, LABYRINTH_ROAD,
-                      LABYRINTH_WALL, xEntrancePosition, yEntrancePosition, 
+    def showLabyrinth(self, LABYRINTH_HEIGHT , LABYRINTH_WIDTH, LABYRINTH_ENTRANCE, 
+                      LABYRINTH_EXIT, LABYRINTH_ROAD, LABYRINTH_WALL, labyrinthArray, 
+                      xEntrancePosition, yEntrancePosition, 
                       xExitPosition, yExitPosition):
         
         pygame.display.flip();
