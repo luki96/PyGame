@@ -29,22 +29,25 @@ class LabyrinthCreator():
                 self.labyrinthArray[i][j].yPointPosition = j;
                 self.labyrinthArray[i][j].labyrinthPointType = self.LABYRINTH_WALL;
                 
-    def createLabyrinthEntrance(self):        
-        self.labyrinthArray[4][3].labyrinthPointType = self.LABYRINTH_ENTRANCE;
-        self.xEntrancePosition = 4;
-        self.yEntrancePosition = 3;
+    def createLabyrinthEntrance(self):
+        self.xEntrancePosition = 0;
+        self.yEntrancePosition = 0;       
+        self.labyrinthArray[self.xEntrancePosition][self.yEntrancePosition].labyrinthPointType = self.LABYRINTH_ENTRANCE;
         
-        self.labyrinthArray[0][2].labyrinthPointType = self.LABYRINTH_EXIT;
-        self.xExitPosition = 0;
-        self.yExitPosition = 2;
-        
-        self.labyrinthArray[1][2].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[1][3].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[2][1].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.labyrinthArray[2][2].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.xExitPosition = 3;
+        self.yExitPosition = 4;
+        self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = self.LABYRINTH_EXIT;
+
+        '''self.labyrinthArray[2][2].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[2][3].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[3][0].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[3][1].labyrinthPointType = self.LABYRINTH_ROAD;
         self.labyrinthArray[3][2].labyrinthPointType = self.LABYRINTH_ROAD;
         self.labyrinthArray[3][3].labyrinthPointType = self.LABYRINTH_ROAD;
-        
+        self.labyrinthArray[4][1].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[4][2].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[4][3].labyrinthPointType = self.LABYRINTH_ROAD;
+        '''
         '''self.xEntrancePosition = random.randrange(self.LABYRINTH_HEIGHT);
         if ((self.xEntrancePosition == 0) or (self.xEntrancePosition == self.LABYRINTH_HEIGHT - 1)):
             self.yEntrancePosition = random.randrange(self.LABYRINTH_WIDTH);
@@ -70,8 +73,50 @@ class LabyrinthCreator():
             self.xExitPosition = self.LABYRINTH_HEIGHT - 1;
             self.yExitPosition = random.randrange(self.LABYRINTH_WIDTH - 1);
             self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = self.LABYRINTH_EXIT;
-            
-    def createLabyrinthRoads(self):
+                    
+    def showLab(self):
+        for i in range(self.LABYRINTH_HEIGHT):
+            for j in range(self.LABYRINTH_WIDTH):
+                print("i = ", i, " j = ", j,
+                 "typ pola = ", self.labyrinthArray[i][j].labyrinthPointType);
+    
+    def createRoadBetweenEntranceAndExit(self):
+        currentX = self.xEntrancePosition;
+        currentY = self.yEntrancePosition;
+        newX = self.generateRandomValue(currentX);
+        newY = currentY;
+        self.connectPoints(currentX, currentY, newX, newY);
+        
+        while (newY != self.yExitPosition - 1):
+            currentX = newX;
+            currentY = newY;
+            newX = currentX;
+            newY = currentY + 1;
+            self.connectPoints(currentX, currentY, newX, newY);
+            newX = self.generateRandomValue(newX);
+            self.connectPoints(currentX, currentY, newX, newY);
+        
+        newY = currentY + 1;
+        self.connectPoints(newX, newY, self.xExitPosition, self.yExitPosition);
+        
+    def generateRandomValue(self, currentValue):
+        newValue = random.randrange(0, self.LABYRINTH_WIDTH);
+        while (newValue == currentValue):
+            newValue = random.randrange(0, self.LABYRINTH_WIDTH);
+        return newValue;
+    
+    def connectPoints(self, startX, startY, stopX, stopY):
+        self.labyrinthArray[stopX][stopY].labyrinthPointType = self.LABYRINTH_ROAD;
+        
+        while (startX != stopX):
+            if (stopX > startX):        #Idziemy w prawa strone
+                startX += 1;
+                self.labyrinthArray[startX][stopY].labyrinthPointType = self.LABYRINTH_ROAD;
+            elif (stopX < startX):        #Idziemy w lewa strone
+                startX -= 1;
+                self.labyrinthArray[startX][stopY].labyrinthPointType = self.LABYRINTH_ROAD;
+
+'''def createLabyrinthRoads(self):
         visitedLabyrinthPoints = 0;
         totalLabyrinthPoints = self.LABYRINTH_WIDTH * self.LABYRINTH_HEIGHT;
         stackOfPoints = deque();
@@ -135,9 +180,4 @@ class LabyrinthCreator():
             newPoint.yPointPosition = tmpY + 1;
             neighboursList.append(newPoint);
             del newPoint;
-        
-    def showLab(self):
-        for i in range(self.LABYRINTH_HEIGHT):
-            for j in range(self.LABYRINTH_WIDTH):
-                print("i = ", i, " j = ", j,
-                 "typ pola = ", self.labyrinthArray[i][j].labyrinthPointType);
+'''
