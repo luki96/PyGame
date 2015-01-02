@@ -4,12 +4,13 @@ from collections import deque;
 
 class LabyrinthCreator():
 
-    LABYRINTH_HEIGHT = 4;
-    LABYRINTH_WIDTH = 4;
+    LABYRINTH_HEIGHT = 5;
+    LABYRINTH_WIDTH = 5;
     LABYRINTH_WALL = 0;
     LABYRINTH_ROAD = 1;
-    LABYRINTH_ENTRANCE = 2;
-    LABYRINTH_EXIT = 3;
+    LABYRINTH_BEST_ROAD = 2
+    LABYRINTH_ENTRANCE = 3;
+    LABYRINTH_EXIT = 4;
     PROBABILITY = 0.5;
     xEntrancePosition = 0;
     yEntrancePosition = 0;
@@ -29,14 +30,20 @@ class LabyrinthCreator():
                 self.labyrinthArray[i][j].labyrinthPointType = self.LABYRINTH_WALL;
                 
     def createLabyrinthEntrance(self):        
-        self.labyrinthArray[0][0].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.xExitPosition = 0;
-        self.yExitPosition = 0;
-        
-        
-        self.labyrinthArray[1][3].labyrinthPointType = self.LABYRINTH_ROAD;
-        self.xEntrancePosition = 1;
+        self.labyrinthArray[4][3].labyrinthPointType = self.LABYRINTH_ENTRANCE;
+        self.xEntrancePosition = 4;
         self.yEntrancePosition = 3;
+        
+        self.labyrinthArray[0][2].labyrinthPointType = self.LABYRINTH_EXIT;
+        self.xExitPosition = 0;
+        self.yExitPosition = 2;
+        
+        self.labyrinthArray[1][2].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[1][3].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[2][1].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[2][2].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[3][2].labyrinthPointType = self.LABYRINTH_ROAD;
+        self.labyrinthArray[3][3].labyrinthPointType = self.LABYRINTH_ROAD;
         
         '''self.xEntrancePosition = random.randrange(self.LABYRINTH_HEIGHT);
         if ((self.xEntrancePosition == 0) or (self.xEntrancePosition == self.LABYRINTH_HEIGHT - 1)):

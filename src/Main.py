@@ -17,15 +17,17 @@ if __name__ == '__main__':
     creator.createLabyrinthEntrance();
     #creator.createLabyrinthExit();
     creator.showLab();
-    creator.createLabyrinthRoads();
-    creator.showLab();
-    '''
-    testPyGame = TestPyGame(ZnajdywanieDrogi.LABYRINTH_HEIGHT, ZnajdywanieDrogi.LABYRINTH_WIDTH);
-    testPyGame.showLabyrinth(ZnajdywanieDrogi.labyrinthArray, ZnajdywanieDrogi.LABYRINTH_HEIGHT, 
-                             ZnajdywanieDrogi.LABYRINTH_WIDTH, ZnajdywanieDrogi.LABYRINTH_ENTRANCE,
-                             ZnajdywanieDrogi.LABYRINTH_EXIT, ZnajdywanieDrogi.LABYRINTH_ROAD,
-                             ZnajdywanieDrogi.LABYRINTH_WALL, ZnajdywanieDrogi.xEntrancePosition, 
-                             ZnajdywanieDrogi.yEntrancePosition, ZnajdywanieDrogi.xExitPosition, 
-                             ZnajdywanieDrogi.yExitPosition);
-                             
-                             '''
+    
+    ZnajdywanieDrogi.searchRoad(creator.labyrinthArray, creator.xEntrancePosition,
+                                creator.yEntrancePosition, 
+                                creator.xExitPosition, creator.yExitPosition);
+    ZnajdywanieDrogi.clearFlagsAfterRoadSearch(creator.labyrinthArray, creator.xExitPosition,
+                                               creator.yExitPosition);
+    
+    testPyGame = TestPyGame(creator.LABYRINTH_HEIGHT, creator.LABYRINTH_WIDTH);
+    testPyGame.showLabyrinth(creator.labyrinthArray, creator.LABYRINTH_HEIGHT, 
+                             creator.LABYRINTH_WIDTH, creator.LABYRINTH_ENTRANCE,
+                             creator.LABYRINTH_EXIT, creator.LABYRINTH_ROAD,
+                             creator.LABYRINTH_WALL, creator.xEntrancePosition, 
+                             creator.yEntrancePosition, creator.xExitPosition, 
+                             creator.yExitPosition);

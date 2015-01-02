@@ -1,8 +1,8 @@
 from labyrinth.base.LabyrinthPoint import LabyrinthPoint;
 from collections import deque;
 
-LABYRINTH_HEIGHT = 20;
-LABYRINTH_WIDTH = 20;
+LABYRINTH_HEIGHT = 5;
+LABYRINTH_WIDTH = 5;
 LABYRINTH_WALL = 0;
 LABYRINTH_ROAD = 1;
 LABYRINTH_BEST_ROAD = 2
@@ -15,7 +15,7 @@ LABYRINTH_ROAD_DOWN = 8;      'komora z nitka w dol'
 
 PROBABILITY = 0.5;
 
-xEntrancePosition = 4;
+'''xEntrancePosition = 4;
 yEntrancePosition = 3;
 xExitPosition = 0;
 yExitPosition = 2;
@@ -38,9 +38,12 @@ def initializeLabyrinth():
     labyrinthArray[2][1].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[2][2].labyrinthPointType = LABYRINTH_ROAD;
     labyrinthArray[3][2].labyrinthPointType = LABYRINTH_ROAD;
-    labyrinthArray[3][3].labyrinthPointType = LABYRINTH_ROAD;
+    labyrinthArray[3][3].labyrinthPointType = LABYRINTH_ROAD;'''
     
-def searchRoad():
+def searchRoad(labyrinthArray, xEntrancePosition, yEntrancePosition, 
+               xExitPosition, yExitPosition):
+    
+    labyrinthArray[xExitPosition][yExitPosition].labyrinthPointType = LABYRINTH_ROAD;
     kolejkaWierzcholkow = deque();
     
     'Oznaczamy wierzcholek wejscia jako odwiedzony i wrzucamy do kolejki'
@@ -114,12 +117,12 @@ def searchRoad():
             kolejkaWierzcholkow.append(point);
             del point;
 
-def showLabirynthWithRoad():
+def showLabirynthWithRoad(labyrinthArray):
     for i in range(LABYRINTH_HEIGHT):
         for j in range(LABYRINTH_WIDTH):
             print("i = ", i, " j = ", j, " typ pola = ", labyrinthArray[i][j].labyrinthPointType);
 
-def clearFlagsAfterRoadSearch():
+def clearFlagsAfterRoadSearch(labyrinthArray, xExitPosition, yExitPosition):
     for i in range(LABYRINTH_HEIGHT):
         for j in range(LABYRINTH_WIDTH):
             if (labyrinthArray[i][j].labyrinthPointType in range (LABYRINTH_ROAD_LEFT, LABYRINTH_ROAD_DOWN + 1)):

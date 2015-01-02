@@ -51,20 +51,20 @@ class TestPyGame(object):
         image = pygame.image.load(path).convert_alpha();
         return image;
     
-    def showLabyrinth(self, labyrinthArray, labyrinthHeight, labyrinthWidth,
-                      labyrinthEntranceFlag, labyrinthExitFlag, labyrinthRoadFlag,
-                      labyrinthWallFlag, xEntrancePosition, yEntrancePosition, 
+    def showLabyrinth(self, labyrinthArray, LABYRINTH_HEIGHT , LABYRINTH_WIDTH,
+                      LABYRINTH_ENTRANCE, LABYRINTH_EXIT, LABYRINTH_ROAD,
+                      LABYRINTH_WALL, xEntrancePosition, yEntrancePosition, 
                       xExitPosition, yExitPosition):
         
         pygame.display.flip();
         
-        for i in range(labyrinthHeight):
-            for j in range(labyrinthWidth):
-                if (labyrinthArray[i][j].labyrinthPointType == labyrinthWallFlag):
+        for i in range(LABYRINTH_HEIGHT):
+            for j in range(LABYRINTH_WIDTH):
+                if (labyrinthArray[i][j].labyrinthPointType == LABYRINTH_WALL):
                     self.surface.blit(self.wallImage, (i * self.IMAGE_WIDTH, 
                                                    j * self.IMAGE_HEIGHT));
                     
-                elif (labyrinthArray[i][j].labyrinthPointType == labyrinthRoadFlag):
+                elif (labyrinthArray[i][j].labyrinthPointType == LABYRINTH_ROAD):
                     self.surface.blit(self.roadImage, (i * self.IMAGE_WIDTH, 
                                                    j * self.IMAGE_HEIGHT));
                 else:
