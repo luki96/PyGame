@@ -31,10 +31,10 @@ class LabyrinthCreator():
         self.yExitPosition = 4;
         self.labyrinthArray[self.xExitPosition][self.yExitPosition].labyrinthPointType = Consts.LABYRINTH_EXIT;
 
-        '''self.labyrinthArray[2][2].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        self.labyrinthArray[2][2].labyrinthPointType = Consts.LABYRINTH_ROAD;
         self.labyrinthArray[2][3].labyrinthPointType = Consts.LABYRINTH_ROAD;
         self.labyrinthArray[3][0].labyrinthPointType = Consts.LABYRINTH_ROAD;
-        self.labyrinthArray[3][1].labyrinthPointType = Consts.LABYRINTH_ROAD;
+        '''self.labyrinthArray[3][1].labyrinthPointType = Consts.LABYRINTH_ROAD;
         self.labyrinthArray[3][2].labyrinthPointType = Consts.LABYRINTH_ROAD;
         self.labyrinthArray[3][3].labyrinthPointType = Consts.LABYRINTH_ROAD;
         self.labyrinthArray[4][1].labyrinthPointType = Consts.LABYRINTH_ROAD;
